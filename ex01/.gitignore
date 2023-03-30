@@ -1,0 +1,5 @@
+*.o
+*.a
+*.exe
+*.ps1
+LPmergeMe

@@ -107,9 +107,7 @@ bool BitcoinExchange::is_digits(const std::string &str)
     		return false;
 		i++;
 	}
-	if (digit)
-		return (true);
-	return (false);
+	return (digit);
 }
 
 bool BitcoinExchange::check_date(std::string date)

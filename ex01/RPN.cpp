@@ -48,12 +48,12 @@ RPN	&RPN::operator=(const RPN &src)
 
 long long	RPN::FT_Atoll(const std::string str)
 {
-	int				sign;
+	long long		sign;
 	size_t			i;
 	long long		sum;
 
-	sum = 0;
-	sign = 1;
+	sum = 0LL;
+	sign = 1LL;
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'\
 	|| str[i] == '\v' || str[i] == '\r' || str[i] == '\f')
@@ -68,7 +68,7 @@ long long	RPN::FT_Atoll(const std::string str)
 	}
 	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
 	{
-		sum = (sum * 10) + (str[i++] - '0');
+		sum = (sum * 10LL) + (str[i++] - '0');
 	}
 	return (sign * sum);
 }
