@@ -274,7 +274,7 @@ void PmergeMe::StartPmerge()
     this->SortVec(_vec);
 	gettimeofday(&end_time, NULL);
     time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
-    std::cout << "Time to process a range of " << _list.size() << " elements with std::vector: " << time_diff_us << "us" << std::endl;
+    std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << time_diff_us << "us" << std::endl;
    	/*il = 0;
     std::cout << "Vector after: " << std::endl;
 	while (il < _vec.size())
