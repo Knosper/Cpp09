@@ -33,5 +33,6 @@ public:
 	bool ValidDigits();
 	void StartPmerge();
 	void SortList();
-	unsigned long long	FT_Atoull(const std::string str);
+	void SortVec(std::vector<unsigned long long> &vec);
+	unsigned long long	FT_Atoull(const std::string &str);
 };

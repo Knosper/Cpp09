@@ -12,6 +12,12 @@
 
 #include "PmergeMe.hpp"
 
+/*
+ * Regarding the time comparison between std::list and std::vector.
+ * This is because std::list is implemented as a doubly-linked list... (more pointers)
+ * if you need to insert or remove elements frequently in the middle of a container, std::list may be a better choice.
+ * 
+*/
 int main(int argc, char **argv)
 {
 	if (argc > 1)
