@@ -143,13 +143,6 @@ void merge_insert_list(std::list<unsigned long long>& arr)
 void PmergeMe::SortList()
 {
 	merge_insert_list(_list);
-	std::cout << "After: ";
-	std::list<unsigned long long>::iterator it;
-    for (it = _list.begin(); it != _list.end(); ++it)
-    {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
 }
 
 void insertion_sort_vec(std::vector<unsigned long long>& vec)
@@ -268,6 +261,13 @@ void PmergeMe::StartPmerge()
     this->SortList();
 	gettimeofday(&end_time, NULL);
     unsigned long long time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
+	
+	std::cout << "After: ";
+	for (std::list<unsigned long long>::iterator it = _list.begin(); it != _list.end(); ++it)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
     std::cout << "Time to process a range of " << _list.size() << " elements with std::list: " << time_diff_us << "us" << std::endl;
 
 	gettimeofday(&start_time, NULL);
@@ -275,7 +275,7 @@ void PmergeMe::StartPmerge()
 	gettimeofday(&end_time, NULL);
     time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
     std::cout << "Time to process a range of " << _list.size() << " elements with std::vector: " << time_diff_us << "us" << std::endl;
-   	/*size_t il = 0;
+   	/*il = 0;
     std::cout << "Vector after: " << std::endl;
 	while (il < _vec.size())
 	{
