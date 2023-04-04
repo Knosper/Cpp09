@@ -27,18 +27,27 @@ unsigned long long	PmergeMe::FT_Atoull(const std::string &str)
 {
 	size_t					i;
 	unsigned long long		sum;
+	static bool				error = false;
 
 	sum = 0ULL;
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'\
 	|| str[i] == '\v' || str[i] == '\r' || str[i] == '\f')
 		i++;
-	if (str[i] == '+')
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (!error)
+		{
+			error = true;
+			std::cout << "negativ numbers turns into positivs" << std::endl;
+		}
 		i++;
+	}
 	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
 	{
 		sum = (sum * 10ULL) + (str[i++] - '0');
 	}
+	
 	return (sum);
 }
 
@@ -228,7 +237,6 @@ void PmergeMe::SortVec(std::vector<unsigned long long> &vec)
 
 void PmergeMe::StartPmerge()
 {
-	size_t i = 0;
 	bool digit = false;
 	std::string::const_iterator begin = _args.begin();
 	std::string::const_iterator end = _args.end();
@@ -249,10 +257,10 @@ void PmergeMe::StartPmerge()
 		++it;
 	}
     std::cout << "Before: ";
-    std::list<unsigned long long>::iterator it2;
-    for (it2 = _list.begin(); it2 != _list.end(); ++it2)
+    std::list<unsigned long long>::iterator it2 = _list.begin();
+    while (it2 != _list.end())
     {
-        std::cout << *it2 << " ";
+        std::cout << *it2++ << " ";
     }
     std::cout << std::endl;
 
@@ -261,12 +269,12 @@ void PmergeMe::StartPmerge()
     this->SortList();
 	gettimeofday(&end_time, NULL);
     unsigned long long time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
-	
 	std::cout << "After: ";
-	for (std::list<unsigned long long>::iterator it = _list.begin(); it != _list.end(); ++it)
-	{
-		std::cout << *it << " ";
-	}
+	it2 = _list.begin();
+	while (it2 != _list.end())
+    {
+        std::cout << *it2++ << " ";
+    }
 	std::cout << std::endl;
     std::cout << "Time to process a range of " << _list.size() << " elements with std::list: " << time_diff_us << "us" << std::endl;
 
@@ -275,12 +283,15 @@ void PmergeMe::StartPmerge()
 	gettimeofday(&end_time, NULL);
     time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
     std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << time_diff_us << "us" << std::endl;
-   	/*il = 0;
+   
+    /*//print vec:
+	std::vector<unsigned long long>::iterator il = _vec.begin();
     std::cout << "Vector after: " << std::endl;
-	while (il < _vec.size())
+	while (il < _vec.end())
 	{
-        std::cout << _vec.at(il) << " ";
+        std::cout << *il << " ";
 		il++;
 	}
-    std::cout << std::endl;*/
+    std::cout << std::endl;
+	*/
 }
