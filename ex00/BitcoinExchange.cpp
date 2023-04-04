@@ -85,7 +85,7 @@ float BitcoinExchange::get_factor(std::string date)
 			int total_diff = std::abs(year_diff * 365 + month_diff * 30 + day_diff);
 			if (total_diff < closest_factor_diff)
 			{
-				closest_factor_diff = total_diff;
+				closest_factor_diff = static_cast<float>(total_diff);
 				closest_date = line_date;
 				ret = atof(line.substr(comma_pos + 1).c_str());
 			}
