@@ -20,6 +20,10 @@
 #include <ctime>
 #include <sys/time.h>
 
+#ifndef VERBOSE
+#define VERBOSE 0
+#endif
+
 class PmergeMe
 {
 protected:

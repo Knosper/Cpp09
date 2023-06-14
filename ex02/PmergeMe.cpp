@@ -256,26 +256,34 @@ void PmergeMe::StartPmerge()
 		}
 		++it;
 	}
-    std::cout << "Before: ";
-    std::list<unsigned long long>::iterator it2 = _list.begin();
-    while (it2 != _list.end())
-    {
-        std::cout << *it2++ << " ";
-    }
-    std::cout << std::endl;
+
+	std::list<unsigned long long>::iterator it2 = _list.begin();
+	if (VERBOSE)
+	{
+		std::cout << "Before: ";
+		while (it2 != _list.end())
+		{
+			std::cout << *it2++ << " ";
+		}
+		std::cout << std::endl;
+	}
 
 	struct timeval start_time, end_time;
     gettimeofday(&start_time, NULL);
     this->SortList();
 	gettimeofday(&end_time, NULL);
     unsigned long long time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
-	std::cout << "After: ";
-	it2 = _list.begin();
-	while (it2 != _list.end())
-    {
-        std::cout << *it2++ << " ";
-    }
-	std::cout << std::endl;
+	
+	if (VERBOSE)
+	{
+		std::cout << "After: ";
+		it2 = _list.begin();
+		while (it2 != _list.end())
+		{
+			std::cout << *it2++ << " ";
+		}
+		std::cout << std::endl;
+	}
     std::cout << "Time to process a range of " << _list.size() << " elements with std::list: " << time_diff_us << "us" << std::endl;
 
 	gettimeofday(&start_time, NULL);
@@ -284,14 +292,16 @@ void PmergeMe::StartPmerge()
     time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
     std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << time_diff_us << "us" << std::endl;
    
-    /*//print vec:
-	std::vector<unsigned long long>::iterator il = _vec.begin();
-    std::cout << "Vector after: " << std::endl;
-	while (il < _vec.end())
+	if (VERBOSE)
 	{
-        std::cout << *il << " ";
-		il++;
+		std::vector<unsigned long long>::iterator il = _vec.begin();
+		std::cout << "Vector after: " << std::endl;
+		while (il < _vec.end())
+		{
+			std::cout << *il << " ";
+			il++;
+		}
+		std::cout << std::endl;
 	}
-    std::cout << std::endl;
-	*/
+	
 }

@@ -143,7 +143,7 @@ void RPN::StartPolish(void)
             _stack.pop();
             double lhs = _stack.top();
             _stack.pop();
-            double result;
+            double result = 0.0;
             if (token == "+")
                 result = lhs + rhs;
             else if (token == "-")

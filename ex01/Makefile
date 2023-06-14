@@ -1,4 +1,4 @@
-NAME = LRPN
+NAME = RPN
 
 SRC =	main.cpp	\
 		RPN.cpp
