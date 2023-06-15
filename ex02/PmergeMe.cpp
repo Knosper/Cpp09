@@ -277,13 +277,13 @@ void PmergeMe::StartPmerge()
 	
 	if (VERBOSE)
 	{
-		std::cout << "Sorted: ";
+		std::cout << std::endl << "Sorted: ";
 		it2 = _list.begin();
 		while (it2 != _list.end())
 		{
 			std::cout << *it2++ << " ";
 		}
-		std::cout << std::endl;
+		std::cout << std::endl << std::endl;
 	}
 	std::cout << "Time to process a range of " << _list.size() << " elements with std::list: " << time_diff_us << "us" << std::endl;
 
@@ -296,7 +296,7 @@ void PmergeMe::StartPmerge()
 	if (VERBOSE)
 	{
 		std::vector<unsigned long long>::iterator il = _vec.begin();
-		std::cout << "SOrted Vector: " << std::endl;
+		std::cout << std::endl << "Sorted Vector: ";
 		while (il < _vec.end())
 		{
 			std::cout << *il << " ";
