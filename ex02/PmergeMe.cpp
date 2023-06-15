@@ -260,7 +260,7 @@ void PmergeMe::StartPmerge()
 	std::list<unsigned long long>::iterator it2 = _list.begin();
 	if (VERBOSE)
 	{
-		std::cout << "Before: ";
+		std::cout << "Original: ";
 		while (it2 != _list.end())
 		{
 			std::cout << *it2++ << " ";
@@ -271,12 +271,13 @@ void PmergeMe::StartPmerge()
 	struct timeval start_time, end_time;
     gettimeofday(&start_time, NULL);
     this->SortList();
+
 	gettimeofday(&end_time, NULL);
     unsigned long long time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
 	
 	if (VERBOSE)
 	{
-		std::cout << "After: ";
+		std::cout << "Sorted: ";
 		it2 = _list.begin();
 		while (it2 != _list.end())
 		{
@@ -295,7 +296,7 @@ void PmergeMe::StartPmerge()
 	if (VERBOSE)
 	{
 		std::vector<unsigned long long>::iterator il = _vec.begin();
-		std::cout << "Vector after: " << std::endl;
+		std::cout << "SOrted Vector: " << std::endl;
 		while (il < _vec.end())
 		{
 			std::cout << *il << " ";

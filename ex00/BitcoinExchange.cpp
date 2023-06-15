@@ -48,51 +48,53 @@ bool BitcoinExchange::valid_first(const std::string tmp)
 
 float BitcoinExchange::get_factor(std::string date)
 {
-    float ret = 0;
-    std::ifstream list("data.csv");
-    if (!list.is_open())
+	float ret = 0;
+	std::ifstream list("data.csv");
+	if (!list.is_open())
 	{
-        std::cout << "data.csv file error" << std::endl;
-        return (1);
-    }
-    std::string line;
+		std::cout << "data.csv file error" << std::endl;
+		return (1);
+	}
+	std::string line;
 	std::getline(list, line);
 	std::string closest_date;
 	size_t comma_pos = 0;
 	float closest_factor_diff = std::numeric_limits<float>::max();
-    while (std::getline(list, line)) 
+	while (std::getline(list, line))
 	{
-        comma_pos = line.find(',');
-        std::string line_date = line.substr(0, comma_pos);
-        if (line_date == date)
+		comma_pos = line.find(',');
+		std::string line_date = line.substr(0, comma_pos);
+		if (line_date == date)
 		{
-            std::string line_factor = line.substr(comma_pos + 1);
-            ret = atof(line_factor.c_str());
+			std::string line_factor = line.substr(comma_pos + 1);
+			ret = atof(line_factor.c_str());
 			list.close();
-            return (ret);
-        }
-		else
-        {
-			int line_year = atoi(line_date.substr(0,4).c_str());
-            int line_month = atoi(line_date.substr(5,2).c_str());
-            int line_day = atoi(line_date.substr(8,2).c_str());
-			int date_year = atoi(date.substr(0,4).c_str());
-			int date_month = atoi(date.substr(5,2).c_str());
-			int date_day = atoi(date.substr(8,2).c_str());
-			int year_diff = line_year - date_year;
-			int month_diff = line_month - date_month;
-			int day_diff = line_day - date_day;
-			int total_diff = std::abs(year_diff * 365 + month_diff * 30 + day_diff);
-			if (total_diff < closest_factor_diff)
+			return (ret);
+		}
+		else if (line_date < date)
+		{
+			int line_year = atoi(line_date.substr(0, 4).c_str());
+			int line_month = atoi(line_date.substr(5, 2).c_str());
+			int line_day = atoi(line_date.substr(8, 2).c_str());
+			int date_year = atoi(date.substr(0, 4).c_str());
+			int date_month = atoi(date.substr(5, 2).c_str());
+			int date_day = atoi(date.substr(8, 2).c_str());
+			int year_diff = date_year - line_year;
+			int month_diff = date_month - line_month;
+			int day_diff = date_day - line_day;
+			int total_diff = year_diff * 365 + month_diff * 30 + day_diff;
+			if (total_diff < closest_factor_diff && total_diff >= 0)
 			{
-				closest_factor_diff = static_cast<float>(total_diff);
+				closest_factor_diff = total_diff;
 				closest_date = line_date;
 				ret = atof(line.substr(comma_pos + 1).c_str());
 			}
-        }
-    }
+		}
+		else
+			break ;
+	}
 	list.close();
-    return (ret);
+	return (ret);
 }
 
 bool BitcoinExchange::is_digits(const std::string &str)
@@ -102,9 +104,9 @@ bool BitcoinExchange::is_digits(const std::string &str)
 	while (str[i])
 	{
 		if (std::isdigit(str[i]))
-            digit = true;
+			digit = true;
 		if (!std::isdigit(str[i]) && !std::isspace(str[i]) && str[i] != '.' && str[i] != '-')
-    		return false;
+			return false;
 		i++;
 	}
 	return (digit);
@@ -114,16 +116,16 @@ bool BitcoinExchange::check_date(std::string date)
 {
 	if (date.length() < 10)
 		return (false);
-    int year = atoi(date.substr(0, 4).c_str());
-    int month = atoi(date.substr(5, 2).c_str());
-    int day = atoi(date.substr(8, 2).c_str());
+	int year = atoi(date.substr(0, 4).c_str());
+	int month = atoi(date.substr(5, 2).c_str());
+	int day = atoi(date.substr(8, 2).c_str());
 	if ((year > 2023 || year < 1997) || (month < 1 || month > 12) || (day < 1 || day > 31))
 		return (false);
 	else if (month % 2 == 0 && day > 30)
 		return (false);
-	else if ((year == 2000 || year == 2004 || year == 2008 || year == 2012 || year == 2016 || year == 2020) && (month == 2 && day > 28))
+	else if ((year == 2000 || year == 2004 || year == 2008 || year == 2012 || year == 2016 || year == 2020) && (month == 2 && day > 29))
 		return (false);
-	else if (month == 2 && day > 29)
+	else if (month == 2 && day > 28)
 		return (false);
 	return (true);
 }
