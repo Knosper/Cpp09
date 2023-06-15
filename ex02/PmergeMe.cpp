@@ -58,9 +58,9 @@ bool PmergeMe::ValidDigits()
 	while (_args[i])
 	{
 		if (std::isdigit(_args[i]))
-            digit = true;
+			digit = true;
 		else if (!std::isdigit(_args[i]) && !std::isspace(_args[i]) && _args[i] != '-')
-    		return (false);
+			return (false);
 		i++;
 	}
 	return (digit);
@@ -68,85 +68,85 @@ bool PmergeMe::ValidDigits()
 
 void insertion_sort_list(std::list<unsigned long long>& arr)
 {
-    for (std::list<unsigned long long>::iterator i = arr.begin(); i != arr.end(); ++i)
+	for (std::list<unsigned long long>::iterator i = arr.begin(); i != arr.end(); ++i)
 	{
-        unsigned long long val = *i;
-        std::list<unsigned long long>::iterator j = i;
-        while (j != arr.begin())
+		unsigned long long val = *i;
+		std::list<unsigned long long>::iterator j = i;
+		while (j != arr.begin())
 		{
-            std::list<unsigned long long>::iterator prev_j = j;
+			std::list<unsigned long long>::iterator prev_j = j;
 			prev_j--;
-            if (*prev_j > val)
+			if (*prev_j > val)
 			{
-                *j = *prev_j;
-                j = prev_j;
-            }
+				*j = *prev_j;
+				j = prev_j;
+			}
 			else
-                break ;
-        }
-        *j = val;
-    }
+				break ;
+		}
+		*j = val;
+	}
 }
 
 void merge_list(std::list<unsigned long long>& arr, std::list<unsigned long long>& L, std::list<unsigned long long>& R)
 {
-    std::list<unsigned long long>::iterator i = L.begin();
-    std::list<unsigned long long>::iterator j = R.begin();
-    while (i != L.end() && j != R.end())
+	std::list<unsigned long long>::iterator i = L.begin();
+	std::list<unsigned long long>::iterator j = R.begin();
+	while (i != L.end() && j != R.end())
 	{
-        if (*i <= *j)
+		if (*i <= *j)
 		{
-            arr.push_back(*i);
-            ++i;
-        }
+			arr.push_back(*i);
+			++i;
+		}
 		else
 		{
-            arr.push_back(*j);
-            ++j;
-        }
-    }
-    while (i != L.end())
+			arr.push_back(*j);
+			++j;
+		}
+	}
+	while (i != L.end())
 	{
-        arr.push_back(*i);
-        ++i;
-    }
-    while (j != R.end())
+		arr.push_back(*i);
+		++i;
+	}
+	while (j != R.end())
 	{
-        arr.push_back(*j);
-        ++j;
-    }
+		arr.push_back(*j);
+		++j;
+	}
 }
 
 void merge_insert_list(std::list<unsigned long long>& arr) 
 {
-    if (arr.size() <= 1)
+	if (arr.size() <= 1)
 	{
-        return ;
-    }
-    if (arr.size() <= 10)
+		return ;
+	}
+	if (arr.size() <= 10)
 	{
-        insertion_sort_list(arr);
-    }
+		insertion_sort_list(arr);
+	}
 	else
 	{
-        std::list<unsigned long long> L, R;
-        int mid = arr.size() / 2;
-        for (std::list<unsigned long long>::iterator it = arr.begin(); it != arr.end(); ++it)
+		std::list<unsigned long long> L, R;
+		int mid = arr.size() / 2;
+		for (std::list<unsigned long long>::iterator it = arr.begin(); it != arr.end(); ++it)
 		{
-            if (std::distance(arr.begin(), it) < mid)
+			if (std::distance(arr.begin(), it) < mid)
 			{
-                L.push_back(*it);
-            }
+				L.push_back(*it);
+			}
 			else
 			{
-                R.push_back(*it);
-            }
-        }
-        merge_insert_list(L);
-        merge_insert_list(R);
-        arr.clear();
-        merge_list(arr, L, R);
-    }
+				R.push_back(*it);
+			}
+		}
+		merge_insert_list(L);
+		merge_insert_list(R);
+		arr.clear();
+		merge_list(arr, L, R);
+	}
 }
 
 void PmergeMe::SortList()
@@ -160,10 +160,10 @@ void insertion_sort_vec(std::vector<unsigned long long>& vec)
 	while (i != vec.end())
 	{
 		unsigned long long val = *i;
-        std::vector<unsigned long long>::iterator j = i;
+		std::vector<unsigned long long>::iterator j = i;
 		while (j != vec.begin())
 		{
-            std::vector<unsigned long long>::iterator prev_j = j;
+			std::vector<unsigned long long>::iterator prev_j = j;
 			prev_j--;
 			if (*prev_j > val)
 			{
@@ -181,43 +181,43 @@ void insertion_sort_vec(std::vector<unsigned long long>& vec)
 void merge_vec(std::vector<unsigned long long>& arr, std::vector<unsigned long long>& L, std::vector<unsigned long long>& R)
 {
 	std::vector<unsigned long long>::iterator i = L.begin();
-    std::vector<unsigned long long>::iterator j = R.begin();
+	std::vector<unsigned long long>::iterator j = R.begin();
 	while (i != L.end() && j != R.end())
 	{
-        if (*i <= *j)
+		if (*i <= *j)
 		{
-            arr.push_back(*i);
-            ++i;
-        }
+			arr.push_back(*i);
+			++i;
+		}
 		else
 		{
-            arr.push_back(*j);
-            ++j;
-        }
-    }
+			arr.push_back(*j);
+			++j;
+		}
+	}
 	while (i != L.end())
 	{
-        arr.push_back(*i);
-        ++i;
-    }
-    while (j != R.end())
+		arr.push_back(*i);
+		++i;
+	}
+	while (j != R.end())
 	{
-        arr.push_back(*j);
-        ++j;
-    }
+		arr.push_back(*j);
+		++j;
+	}
 }
 
 void PmergeMe::SortVec(std::vector<unsigned long long> &vec)
 {
 	if (vec.size() <= 1)
 		return ;
-    if (vec.size() <= 10)
+	if (vec.size() <= 10)
 	{
-        insertion_sort_vec(vec);
-    }
+		insertion_sort_vec(vec);
+	}
 	else
 	{
-        std::vector<unsigned long long> L, R;
+		std::vector<unsigned long long> L, R;
 		int mid = vec.size() / 2;
 		std::vector<unsigned long long>::iterator it = vec.begin();
 		while (it != vec.end())
@@ -269,11 +269,11 @@ void PmergeMe::StartPmerge()
 	}
 
 	struct timeval start_time, end_time;
-    gettimeofday(&start_time, NULL);
-    this->SortList();
+	gettimeofday(&start_time, NULL);
+	this->SortList();
 
 	gettimeofday(&end_time, NULL);
-    unsigned long long time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
+	unsigned long long time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
 	
 	if (VERBOSE)
 	{
@@ -285,13 +285,13 @@ void PmergeMe::StartPmerge()
 		}
 		std::cout << std::endl;
 	}
-    std::cout << "Time to process a range of " << _list.size() << " elements with std::list: " << time_diff_us << "us" << std::endl;
+	std::cout << "Time to process a range of " << _list.size() << " elements with std::list: " << time_diff_us << "us" << std::endl;
 
 	gettimeofday(&start_time, NULL);
-    this->SortVec(_vec);
+	this->SortVec(_vec);
 	gettimeofday(&end_time, NULL);
-    time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
-    std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << time_diff_us << "us" << std::endl;
+	time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
+	std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << time_diff_us << "us" << std::endl;
    
 	if (VERBOSE)
 	{
