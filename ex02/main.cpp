@@ -30,8 +30,8 @@ int main(int argc, char **argv)
 			tmp += " ";
 		}
 		PmergeMe a(tmp);
-		if (a.ValidDigits())
-			a.StartPmerge();
+		if (a.valid_digits())
+			a.start_pmerge();
 		else
 			std::cout << "Error: invalid char found" << std::endl;
 	}

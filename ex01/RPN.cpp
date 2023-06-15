@@ -16,7 +16,7 @@ RPN::RPN():_args(), _stack() {}
 
 RPN::RPN(std::string arg):_args(arg), _stack()
 {
-	int tmp = InputCheck(arg);
+	int tmp = input_check(arg);
 	if (tmp != 1)
 	{
 		if (tmp == _OVERFLOW)
@@ -46,7 +46,7 @@ RPN	&RPN::operator=(const RPN &src)
 	return (*this);
 }
 
-long long	RPN::FT_Atoll(const std::string str)
+long long	RPN::ft_atoll(const std::string str)
 {
 	long long		sign;
 	size_t			i;
@@ -77,7 +77,7 @@ long long	RPN::FT_Atoll(const std::string str)
  * is not counting operator and numbers!!
  * syntax controll missing 
  */
-int RPN::InputCheck(std::string arg)
+int RPN::input_check(std::string arg)
 {
 	size_t i = 0;
 	size_t j = 0;
@@ -99,7 +99,7 @@ int RPN::InputCheck(std::string arg)
 					return (_WRONGCHAR);
 				else if (arg[i] == '-')
 				{
-					tmp = FT_Atoll(arg.substr(i));
+					tmp = ft_atoll(arg.substr(i));
 					if (tmp < -2147483648LL)
 						return (_OVERFLOW);
 					else if (tmp > 9 || tmp < 0)
@@ -110,7 +110,7 @@ int RPN::InputCheck(std::string arg)
 		else if (arg[i] != ' ' && digit)
 		{
 			digit = false;
-			tmp = FT_Atoll(arg.substr(i));
+			tmp = ft_atoll(arg.substr(i));
 			if (tmp > 2147483647LL)
 				return (_OVERFLOW);
 			else if (tmp > 9 || tmp < 0)
@@ -123,7 +123,7 @@ int RPN::InputCheck(std::string arg)
 	return (true);
 }
 
-void RPN::StartPolish(void)
+void RPN::start_polish(void)
 {
 	std::istringstream iss(_args);
     std::string token;

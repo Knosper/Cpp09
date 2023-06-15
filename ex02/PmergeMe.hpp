@@ -20,9 +20,7 @@
 #include <ctime>
 #include <sys/time.h>
 
-#ifndef VERBOSE
 #define VERBOSE 0
-#endif
 
 class PmergeMe
 {
@@ -35,9 +33,9 @@ private:
 public:
 	PmergeMe(std::string s);
 	~PmergeMe();
-	bool ValidDigits();
-	void StartPmerge();
-	void SortList();
-	void SortVec(std::vector<unsigned long long> &vec);
-	unsigned long long	FT_Atoull(const std::string &str);
+	bool valid_digits();
+	void start_pmerge();
+	void sort_list();
+	void sort_vec(std::vector<unsigned long long> &vec);
+	unsigned long long	ft_atoull(const std::string &str);
 };

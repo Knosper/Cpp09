@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 		try
 		{
 			RPN tmp(arg);
-			tmp.StartPolish();
+			tmp.start_polish();
 		}
 		catch(const std::exception& e)
 		{

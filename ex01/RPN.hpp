@@ -35,11 +35,11 @@ public:
 
 	RPN(std::string arg);
 	~RPN();
-	void StartPolish(void);
+	void start_polish(void);
 
 private:
 	RPN(const RPN &cp);
 	RPN	&operator=(const RPN &src);
-	int InputCheck(std::string arg);
-	long long	FT_Atoll(const std::string str);
+	int input_check(std::string arg);
+	long long	ft_atoll(const std::string str);
 };

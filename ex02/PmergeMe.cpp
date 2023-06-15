@@ -23,7 +23,7 @@ PmergeMe::~PmergeMe()
 	_list.clear();
 }
 
-unsigned long long	PmergeMe::FT_Atoull(const std::string &str)
+unsigned long long	PmergeMe::ft_atoull(const std::string &str)
 {
 	size_t					i;
 	unsigned long long		sum;
@@ -51,7 +51,7 @@ unsigned long long	PmergeMe::FT_Atoull(const std::string &str)
 	return (sum);
 }
 
-bool PmergeMe::ValidDigits()
+bool PmergeMe::valid_digits()
 {
 	bool digit = false;
 	int i = 0;
@@ -149,7 +149,7 @@ void merge_insert_list(std::list<unsigned long long>& arr)
 	}
 }
 
-void PmergeMe::SortList()
+void PmergeMe::sort_list()
 {
 	merge_insert_list(_list);
 }
@@ -207,7 +207,7 @@ void merge_vec(std::vector<unsigned long long>& arr, std::vector<unsigned long l
 	}
 }
 
-void PmergeMe::SortVec(std::vector<unsigned long long> &vec)
+void PmergeMe::sort_vec(std::vector<unsigned long long> &vec)
 {
 	if (vec.size() <= 1)
 		return ;
@@ -228,14 +228,14 @@ void PmergeMe::SortVec(std::vector<unsigned long long> &vec)
 				R.push_back(*it);
 			it++;
 		}
-		SortVec(L);
-		SortVec(R);
+		sort_vec(L);
+		sort_vec(R);
 		vec.clear();
 		merge_vec(vec, L, R);
 	}
 }
 
-void PmergeMe::StartPmerge()
+void PmergeMe::start_pmerge()
 {
 	bool digit = false;
 	std::string::const_iterator begin = _args.begin();
@@ -246,8 +246,8 @@ void PmergeMe::StartPmerge()
 		if (((std::isdigit(*it) || *it == '-') && digit) || it == begin)
 		{
 			std::string::const_iterator num_begin = it;
-			_vec.push_back(this->FT_Atoull(std::string(num_begin, end)));
-			_list.push_back(this->FT_Atoull(std::string(num_begin, end)));
+			_vec.push_back(this->ft_atoull(std::string(num_begin, end)));
+			_list.push_back(this->ft_atoull(std::string(num_begin, end)));
 			digit = false;
 		}
 		else if (*it == ' ')
@@ -270,7 +270,7 @@ void PmergeMe::StartPmerge()
 
 	struct timeval start_time, end_time;
 	gettimeofday(&start_time, NULL);
-	this->SortList();
+	this->sort_list();
 
 	gettimeofday(&end_time, NULL);
 	unsigned long long time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
@@ -288,7 +288,7 @@ void PmergeMe::StartPmerge()
 	std::cout << "Time to process a range of " << _list.size() << " elements with std::list: " << time_diff_us << "us" << std::endl;
 
 	gettimeofday(&start_time, NULL);
-	this->SortVec(_vec);
+	this->sort_vec(_vec);
 	gettimeofday(&end_time, NULL);
 	time_diff_us = (end_time.tv_sec - start_time.tv_sec) * 1000000L + (end_time.tv_usec - start_time.tv_usec);
 	std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << time_diff_us << "us" << std::endl;

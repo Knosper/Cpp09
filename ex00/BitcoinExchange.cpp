@@ -153,7 +153,7 @@ void	BitcoinExchange::calcValue(void)
 			val = atof((tmp.substr(pos + 1).c_str()));
 			maxValue = strtoll((tmp.substr(pos + 1)).c_str(), NULL, 10);
 			_data.insert(std::make_pair(date, val));
-			if (maxValue >= 2147483648LL)
+			if (maxValue >= 2147483648LL || maxValue > 1000)
 				std::cout << "Error: too large a number." << std::endl;
 			else
 			{
@@ -165,9 +165,7 @@ void	BitcoinExchange::calcValue(void)
 						std::cout << "Error: not a positiv number." << std::endl;
 				}
 				else
-				{
 					std::cout << "Error: bad input => " << date << std::endl;
-				}
 			}
 			_data.clear();
 		}

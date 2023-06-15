@@ -5,7 +5,11 @@ SRC =	main.cpp	\
 
 OBJ = $(SRC:.cpp=.o)
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+DEP = $(OBJ:.o=.d)
+
+FLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
+
+-include $(DEP)
 
 CXX = c++
 
@@ -19,6 +23,7 @@ $(NAME): $(OBJ)
 
 clean:
 	rm -rf *.o
+	rm -rf $(DEP)
 
 fclean: clean
 	rm -rf $(NAME)
